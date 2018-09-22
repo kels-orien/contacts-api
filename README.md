@@ -1,2 +1,2 @@
 # contacts-api
-A Rest APi for contacts
+A Rest API for contacts

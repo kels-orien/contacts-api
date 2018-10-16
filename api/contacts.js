@@ -25,25 +25,25 @@ app.get("/contact/:contactId", function(req, res) {
   if (!req.params.productId) {
     res.status(500).send("ID field is required.");
   } else {
-    inventoryDB.findOne({ _id: req.params.productId }, function(err, product) {
-      res.send(product);
+    inventoryDB.findOne({ _id: req.params.contactId }, function(err, contact) {
+      res.send(contact);
     });
   }
 });
 
 // post contact
 app.post("/contact", function(req, res) {
-  var newProduct = req.body;
+  var newContact = req.body;
 
-  inventoryDB.insert(newProduct, function(err, product) {
+  inventoryDB.insert(newContact, function(err, contact) {
     if (err) res.status(500).send(err);
-    else res.send(product);
+    else res.send(contact);
   });
 });
 
 //delete contact using contact id
 app.delete("/contact/:contactId", function(req, res) {
-  inventoryDB.remove({ _id: req.params.productId }, function(err, numRemoved) {
+  inventoryDB.remove({ _id: req.params.contactId }, function(err, numRemoved) {
     if (err) res.status(500).send(err);
     else res.sendStatus(200);
   });
@@ -51,12 +51,12 @@ app.delete("/contact/:contactId", function(req, res) {
 
 // Updates contact
 app.put("/contact", function(req, res) {
-  var productId = req.body._id;
+  var contactId = req.body._id;
 
-  inventoryDB.update({ _id: productId }, req.body, {}, function(
+  inventoryDB.update({ _id: contactId }, req.body, {}, function(
     err,
     numReplaced,
-    product
+    contact
   ) {
     if (err) res.status(500).send(err);
     else res.sendStatus(200);

@@ -22,7 +22,7 @@ app.get("/contacts", function(req, res) {
 
 // GET a contact by _id
 app.get("/contact/:contactId", function(req, res) {
-  if (!req.params.productId) {
+  if (!req.params.contactId) {
     res.status(500).send("ID field is required.");
   } else {
     inventoryDB.findOne({ _id: req.params.contactId }, function(err, contact) {
@@ -50,13 +50,12 @@ app.delete("/contact/:contactId", function(req, res) {
 });
 
 // Updates contact
-app.put("/contact", function(req, res) {
+app.patch("/contact", function(req, res) {
   var contactId = req.body._id;
 
   inventoryDB.update({ _id: contactId }, req.body, {}, function(
     err,
-    numReplaced,
-    contact
+    numReplaced
   ) {
     if (err) res.status(500).send(err);
     else res.sendStatus(200);
